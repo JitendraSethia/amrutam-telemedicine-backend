@@ -1,0 +1,35 @@
+# OpenTelemetry Collector — receives OTLP traces from the app/worker and
+# forwards them to Jaeger. In production the same collector fans out to a
+# managed backend (Tempo, Honeycomb, Datadog, X-Ray) and can also scrape/relay
+# metrics. Keeping the collector in the path decouples the app from any one
+# tracing vendor.
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+      grpc:
+        endpoint: 0.0.0.0:4317
+
+processors:
+  batch:
+    timeout: 2s
+  memory_limiter:
+    check_interval: 5s
+    limit_percentage: 80
+    spike_limit_percentage: 25
+
+exporters:
+  otlp/jaeger:
+    endpoint: jaeger:4317
+    tls:
+      insecure: true
+  debug:
+    verbosity: basic
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch]
+      exporters: [otlp/jaeger, debug]

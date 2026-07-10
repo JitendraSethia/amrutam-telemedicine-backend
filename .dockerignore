@@ -1,0 +1,14 @@
+node_modules
+dist
+coverage
+.git
+.github
+.env
+.env.*
+*.log
+logs
+infra/terraform/.terraform
+tests
+docs
+*.md
+!README.md

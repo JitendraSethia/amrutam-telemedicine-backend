@@ -1,0 +1,16 @@
+# Copy to terraform.tfvars and fill in for your environment.
+region      = "ap-south-1"
+environment = "production"
+
+vpc_id             = "vpc-0123456789abcdef0"
+private_subnet_ids = ["subnet-aaa", "subnet-bbb"]
+public_subnet_ids  = ["subnet-ccc", "subnet-ddd"]
+
+container_image = "123456789012.dkr.ecr.ap-south-1.amazonaws.com/amrutam:latest"
+certificate_arn = "arn:aws:acm:ap-south-1:123456789012:certificate/xxxxxxxx"
+
+desired_count     = 3
+cpu               = 512
+memory            = 1024
+db_instance_class = "db.r6g.large"
+redis_node_type   = "cache.r6g.large"
