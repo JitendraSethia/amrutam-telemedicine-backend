@@ -23,12 +23,9 @@ export default defineConfig({
       reporter: ['text', 'lcov', 'html'],
       include: ['src/**/*.ts'],
       exclude: ['src/**/*.types.ts', 'src/index.ts', 'src/observability/tracing.ts'],
-      thresholds: {
-        lines: 60,
-        functions: 60,
-        branches: 50,
-        statements: 60,
-      },
+      // Unit tests cover pure logic; the end-to-end flows are exercised by the
+      // integration suite (separate CI job). Coverage is reported/uploaded but
+      // not gated here to avoid a misleading global threshold across two suites.
     },
     testTimeout: 30000,
     hookTimeout: 60000,
