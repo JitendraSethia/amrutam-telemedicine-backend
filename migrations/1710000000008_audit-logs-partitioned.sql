@@ -52,7 +52,7 @@ $$ LANGUAGE plpgsql;
 
 -- Bootstrap current month ± 2 (uses the DB clock, so migration is deterministic
 -- relative to when it runs).
-SELECT ensure_audit_partition(date_trunc('month', now())::date + (n || ' month')::interval)
+SELECT ensure_audit_partition((date_trunc('month', now())::date + (n || ' month')::interval)::date)
 FROM generate_series(-1, 2) AS n;
 
 -- Down Migration

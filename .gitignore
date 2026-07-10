@@ -42,3 +42,6 @@ infra/terraform/.terraform/
 # Misc
 tmp/
 .cache/
+
+# Local test runtime (portable pg/redis)
+.local/
